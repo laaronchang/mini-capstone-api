@@ -1,6 +1,6 @@
-class CreateCostplus < ActiveRecord::Migration[7.1]
+class CreateProducts < ActiveRecord::Migration[7.1]
   def change
-    create_table :costplus do |t|
+    create_table :products do |t|
       t.string :item_name
       t.integer :item_price
       t.string :image_url

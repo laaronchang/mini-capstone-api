@@ -1,2 +1,0 @@
-class Costplu < ApplicationRecord
-end
