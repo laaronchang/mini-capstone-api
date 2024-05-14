@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   
   def show
     @product = Product.find_by(id:3)
-    render template:"product/show"
+    render template:"products/show"
 
   end
 
