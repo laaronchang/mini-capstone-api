@@ -12,9 +12,22 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_equal Product.count, data.length
   end
 
+  # test "create" do
+  #   assert_difference "Product.count", 1 do
+  #     post "/products.json", params: { name: "test product", price: 1, image_url: "image.jpg", description: "test description"  }
+  #   end
+  # end
+
   test "create" do
     assert_difference "Product.count", 1 do
-      post "/products.json", params: { name: "test product", price: 1, image_url: "image.jpg", description: "test description"  }
+      post "/products.json", params: { item_price: 1, item_name: "test product", item_description: "test description", image_url: "image.jpg"  }
+      data = JSON.parse(response.body)
+      assert_response 200
+      refute_nil data["id"]
+      assert_equal "test product", data["name"]
+      assert_equal 1, data["price"]
+      assert_equal "image.jpg", data["image_url"]
+      assert_equal "test description", data["description"]
     end
   end
 
@@ -45,5 +58,12 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_equal product.item_price, data["price"]
     assert_equal product.image_url, data["image_url"]
     assert_equal product.item_description, data["description"]
+  end
+
+  test "destroy" do
+    assert_difference "Product.count", -1 do
+      delete "/products/#{Product.first.id}.json"
+      assert_response 200
+    end
   end
 end

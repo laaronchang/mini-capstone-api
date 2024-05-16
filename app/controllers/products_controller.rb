@@ -52,9 +52,4 @@ class ProductsController < ApplicationController
     render json: { message: "Product destroyed successfully!" }
   end
 
-  test "destroy" do
-    assert_difference "Product.count", -1 do
-      delete "/products/#{Product.first.id}.json"
-      assert_response 200
-    end
 end
