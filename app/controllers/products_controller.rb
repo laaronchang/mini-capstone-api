@@ -34,4 +34,27 @@ class ProductsController < ApplicationController
     @product.save
     render template: "products/show"
   end
+
+  def update
+    @product = Product.find_by(id: params[:id])
+    @product.update(
+      item_name: params[:item_name] || @product.item_name,
+      item_price: params[:item_price] || @product.item_price,
+      image_url: params[:image_url] || @product.image_url,
+      item_description: params[:item_description] || @product.item_description,
+    )
+    render :show
+  end
+
+  def destroy
+    @product = Product.find_by(id: params[:id])
+    @product.destroy
+    render json: { message: "Product destroyed successfully!" }
+  end
+
+  test "destroy" do
+    assert_difference "Product.count", -1 do
+      delete "/products/#{Product.first.id}.json"
+      assert_response 200
+    end
 end
