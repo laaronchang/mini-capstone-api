@@ -31,8 +31,16 @@ class ProductsController < ApplicationController
       image_url: params[:image_url], 
       item_description: params[:item_description], 
     )
-    @product.save
-    render template: "products/show"
+    # @product.save
+    # render template: "products/show"
+    # below shows error message when validations are not met
+    if @product.save
+      render template: "products/show"
+    else
+      # below shows message of your choosing
+      # render json: {message: "This is not the way"}
+      render json: {errors: @product.errors.full_messages}
+    end
   end
 
   def update

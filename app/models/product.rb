@@ -1,11 +1,12 @@
 class Product < ApplicationRecord
+  validates :item_name, presence: true
 
   def is_discounted?
-    # p id
+    p id
     if item_price <= 10
-      return true
+      p true
     else
-      return false
+      p false
     end
   end
 
@@ -18,7 +19,7 @@ class Product < ApplicationRecord
   def tax_result 
     tax_rate = 0.09
     tax = item_price * tax_rate
-    return tax.round(2) 
+    p tax.round(2) 
   end
 
   # why was this broken?
@@ -29,7 +30,7 @@ class Product < ApplicationRecord
 
   def total_result
     total = item_price + tax_result
-    return total
+    p total
   end
   
 end
