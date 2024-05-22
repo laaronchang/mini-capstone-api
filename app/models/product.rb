@@ -33,4 +33,6 @@ class Product < ApplicationRecord
     p total
   end
   
+  belongs_to :supplier
+
 end
